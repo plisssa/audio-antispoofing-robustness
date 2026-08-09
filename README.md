@@ -1,7 +1,7 @@
 # audio-antispoofing-robustness
 
 Оценка устойчивости детекторов аудиодипфейков к сдвигу распределения, искажениям сигнала и
-состязательным атакам. Материалы к обзорной статье и курсовой работе (НИУ ВШЭ, ФКН).
+состязательным атакам. 
 
 ## Состав
 
@@ -36,8 +36,7 @@ python figures/make_figures.py --results results/report --out figures/out
 python figures/make_spectrogram.py --out figures/out
 ```
 
-Прогоны экспериментов выполняются на кластере: `scripts/slurm_sweep.sh`, `scripts/slurm_attack.sh`
-(требуются GPU и загруженные корпуса).
+Прогоны экспериментов выполняются на кластере: `scripts/slurm_sweep.sh`, `scripts/slurm_attack.sh`.
 
 ## Метрики
 
