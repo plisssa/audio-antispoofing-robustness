@@ -1,0 +1,47 @@
+aasist3:
+  repo_path: third_party/AASIST3
+  repo: MTUCI/AASIST3
+  w2v_cache_dir: third_party/AASIST3/weights
+  spoof_index: 0
+  crop: 64600
+
+spectra_aasist3:
+  repo_path: third_party/Spectra-AASIST3
+  spoof_index: 0
+  crop: 64600
+
+aasist:
+  repo_path: third_party/aasist
+  config: third_party/aasist/config/AASIST.conf
+  checkpoint: third_party/aasist/models/weights/AASIST.pth
+  spoof_index: 0
+  crop: 64600
+
+rawnet2:
+  repo_path: third_party/rawnet2
+  config: third_party/rawnet2/model_config_RawNet.yaml
+  checkpoint: third_party/rawnet2/pre_trained_DF_RawNet2.pth
+  spoof_index: 0
+  crop: 64600
+
+ssl_aasist:
+  repo_path: third_party/SSL_Anti-spoofing
+  checkpoint: third_party/SSL_Anti-spoofing/Best_SSL_model_LA.pth
+  spoof_index: 0
+  crop: 64600
+  extra: {}
+
+xlsr_mamba:
+  repo_path: third_party/XLSR-Mamba
+  checkpoint: third_party/XLSR-Mamba/xlsr_mamba_LA.pth
+  spoof_index: 0
+  crop: 64600
+  extra: {emb_size: 144, num_encoders: 12}
+
+nes2net:
+  repo_path: third_party/Nes2Net
+  checkpoint: third_party/Nes2Net/WavLM_Nes2Net_X.pth
+  model_name: WavLM_Nes2Net_X
+  crop: 64000
+  extra: {agg: SEA, dilation: 1, pool_func: mean, SE_ratio: [1], Nes_ratio: [8, 8]}
+

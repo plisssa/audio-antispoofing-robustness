@@ -1,0 +1,216 @@
+runs: runs
+
+stages:
+  - name: verify_asv19
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/asvspoof2019_la/eval_small.csv}
+  - name: verify_itw
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/in_the_wild/manifest_small.csv}
+
+  - name: sweep_reference_native
+    type: sweep
+    params: {detector: [reference], manifest: data/reference/native.csv, run_dir: runs/pipeline/reference_native_sweep}
+  - name: sweep_reference_crossdomain
+    type: sweep
+    params: {detector: [reference], manifest: data/reference/crossdomain.csv, run_dir: runs/pipeline/reference_crossdomain_sweep}
+  - name: sweep_aasist_asv19
+    type: sweep
+    params: {detector: [aasist], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/aasist_asv19_sweep}
+  - name: sweep_aasist_itw
+    type: sweep
+    params: {detector: [aasist], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/aasist_itw_sweep}
+  - name: sweep_aasist3_asv19
+    type: sweep
+    params: {detector: [aasist3], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/aasist3_asv19_sweep}
+  - name: sweep_aasist3_itw
+    type: sweep
+    params: {detector: [aasist3], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/aasist3_itw_sweep}
+  - name: sweep_spectra_asv19
+    type: sweep
+    params: {detector: [spectra_aasist3], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/spectra_asv19_sweep}
+  - name: sweep_spectra_itw
+    type: sweep
+    params: {detector: [spectra_aasist3], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/spectra_itw_sweep}
+
+  - name: sweep_real_itw
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3], manifest: data/in_the_wild/manifest_small.csv, distortions: configs/distortions_full.yaml, only: [real_noise, real_bird, real_rir], run_dir: runs/pipeline/real_itw_sweep}
+  - name: sweep_telephony_asv19
+    type: sweep
+    optional: true
+    params: {detector: [aasist, aasist3, spectra_aasist3], manifest: data/asvspoof2019_la/eval_small.csv, distortions: configs/distortions_full.yaml, only: [telephony_g711a, telephony_g711u, telephony_g722], run_dir: runs/pipeline/telephony_asv19_sweep}
+  - name: sweep_encodec_asv19
+    type: sweep
+    optional: true
+    params: {detector: [aasist, aasist3, spectra_aasist3], manifest: data/asvspoof2019_la/eval_small.csv, distortions: configs/distortions_full.yaml, only: [neural_encodec], run_dir: runs/pipeline/encodec_asv19_sweep}
+
+  - name: verify_asv21
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/asvspoof2021_la/eval_small.csv}
+  - name: sweep_aasist_asv21
+    type: sweep
+    optional: true
+    params: {detector: [aasist], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/aasist_asv21_sweep}
+  - name: sweep_aasist3_asv21
+    type: sweep
+    optional: true
+    params: {detector: [aasist3], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/aasist3_asv21_sweep}
+  - name: sweep_spectra_asv21
+    type: sweep
+    optional: true
+    params: {detector: [spectra_aasist3], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/spectra_asv21_sweep}
+
+  - name: attack_aasist_asv19
+    type: attack
+    params: {detector: aasist, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist3], run_dir: runs/pipeline/aasist_asv19_attack}
+  - name: attack_aasist3_asv19
+    type: attack
+    params: {detector: aasist3, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist], run_dir: runs/pipeline/aasist3_asv19_attack}
+  - name: attack_spectra_asv19
+    type: attack
+    params: {detector: spectra_aasist3, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist], run_dir: runs/pipeline/spectra_asv19_attack}
+
+  - name: sweep_rawnet2_asv19
+    type: sweep
+    optional: true
+    params: {detector: [rawnet2], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/rawnet2_asv19_sweep}
+  - name: sweep_ssl_aasist_asv19
+    type: sweep
+    optional: true
+    params: {detector: [ssl_aasist], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/ssl_aasist_asv19_sweep}
+  - name: sweep_xlsr_mamba_asv19
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_mamba], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/xlsr_mamba_asv19_sweep}
+  - name: attack_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist], run_dir: runs/pipeline/ssl_aasist_asv19_attack}
+  - name: sweep_ssl_aasist_itw
+    type: sweep
+    optional: true
+    params: {detector: [ssl_aasist], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/ssl_aasist_itw_sweep}
+  - name: sweep_ssl_aasist_asv21
+    type: sweep
+    optional: true
+    params: {detector: [ssl_aasist], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/ssl_aasist_asv21_sweep}
+  - name: sweep_rawnet2_itw
+    type: sweep
+    optional: true
+    params: {detector: [rawnet2], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/rawnet2_itw_sweep}
+  - name: sweep_rawnet2_asv21
+    type: sweep
+    optional: true
+    params: {detector: [rawnet2], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/rawnet2_asv21_sweep}
+  - name: sweep_nes2net_asv21
+    type: sweep
+    optional: true
+    params: {detector: [nes2net], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/nes2net_asv21_sweep}
+  - name: sweep_extra_conditions_asv19
+    type: sweep
+    optional: true
+    params: {detector: [ssl_aasist, rawnet2, nes2net], manifest: data/asvspoof2019_la/eval_small.csv, distortions: configs/distortions_full.yaml, only: [telephony_g711a, telephony_g722, neural_encodec], run_dir: runs/pipeline/extra_conditions_asv19_sweep}
+
+  - name: sweep_xlsr_mamba_itw
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_mamba], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/xlsr_mamba_itw_sweep}
+  - name: sweep_xlsr_mamba_asv21
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_mamba], manifest: data/asvspoof2021_la/eval_small.csv, run_dir: runs/pipeline/xlsr_mamba_asv21_sweep}
+  - name: merge_reference_asv21
+    type: merge
+    optional: true
+    params: {train_from: data/asvspoof2019_la/train_small.csv, eval_from: data/asvspoof2021_la/eval_small.csv, out: data/reference/crossdomain21.csv}
+  - name: sweep_reference_asv21
+    type: sweep
+    optional: true
+    params: {detector: [reference], manifest: data/reference/crossdomain21.csv, run_dir: runs/pipeline/reference_asv21_sweep}
+
+  - name: attack_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist], run_dir: runs/pipeline/rawnet2_asv19_attack}
+  - name: attack_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [ssl_aasist, aasist], run_dir: runs/pipeline/xlsr_mamba_asv19_attack}
+  - name: attack_nes2net_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/asvspoof2019_la/eval_small.csv, transfer: [aasist], run_dir: runs/pipeline/nes2net_asv19_attack}
+
+  - name: sweep_nes2net_asv19
+    type: sweep
+    optional: true
+    params: {detector: [nes2net], manifest: data/asvspoof2019_la/eval_small.csv, run_dir: runs/pipeline/nes2net_asv19_sweep}
+  - name: sweep_nes2net_itw
+    type: sweep
+    optional: true
+    params: {detector: [nes2net], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/nes2net_itw_sweep}
+
+  - name: combine_all
+    type: combine
+    always: true
+    params:
+      out: runs/pipeline/combined
+      error_table:
+        - runs/pipeline/reference_native_sweep/error_table.csv
+        - runs/pipeline/reference_crossdomain_sweep/error_table.csv
+        - runs/pipeline/aasist_asv19_sweep/error_table.csv
+        - runs/pipeline/aasist_itw_sweep/error_table.csv
+        - runs/pipeline/aasist3_asv19_sweep/error_table.csv
+        - runs/pipeline/aasist3_itw_sweep/error_table.csv
+        - runs/pipeline/spectra_asv19_sweep/error_table.csv
+        - runs/pipeline/spectra_itw_sweep/error_table.csv
+        - runs/pipeline/aasist_asv21_sweep/error_table.csv
+        - runs/pipeline/aasist3_asv21_sweep/error_table.csv
+        - runs/pipeline/spectra_asv21_sweep/error_table.csv
+        - runs/pipeline/real_itw_sweep/error_table.csv
+        - runs/pipeline/rawnet2_asv19_sweep/error_table.csv
+        - runs/pipeline/ssl_aasist_asv19_sweep/error_table.csv
+        - runs/pipeline/xlsr_mamba_asv19_sweep/error_table.csv
+        - runs/pipeline/nes2net_asv19_sweep/error_table.csv
+        - runs/pipeline/nes2net_itw_sweep/error_table.csv
+        - runs/pipeline/ssl_aasist_itw_sweep/error_table.csv
+        - runs/pipeline/ssl_aasist_asv21_sweep/error_table.csv
+        - runs/pipeline/rawnet2_itw_sweep/error_table.csv
+        - runs/pipeline/rawnet2_asv21_sweep/error_table.csv
+        - runs/pipeline/nes2net_asv21_sweep/error_table.csv
+        - runs/pipeline/extra_conditions_asv19_sweep/error_table.csv
+        - runs/pipeline/xlsr_mamba_itw_sweep/error_table.csv
+        - runs/pipeline/xlsr_mamba_asv21_sweep/error_table.csv
+        - runs/pipeline/reference_asv21_sweep/error_table.csv
+  - name: inverse_all
+    type: inverse
+    always: true
+    params:
+      out: runs/pipeline/inverse
+      error_table:
+        - runs/pipeline/reference_crossdomain_sweep/error_table.csv
+        - runs/pipeline/aasist_itw_sweep/error_table.csv
+        - runs/pipeline/aasist3_itw_sweep/error_table.csv
+        - runs/pipeline/spectra_itw_sweep/error_table.csv
+  - name: eda_all
+    type: eda
+    always: true
+    params:
+      out: runs/pipeline/eda
+      error_table:
+        - runs/pipeline/reference_crossdomain_sweep/error_table.csv
+        - runs/pipeline/aasist_itw_sweep/error_table.csv
+        - runs/pipeline/aasist3_itw_sweep/error_table.csv
+        - runs/pipeline/spectra_itw_sweep/error_table.csv
+
+  - name: report_all
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline.yaml, out: runs/pipeline/report}
+

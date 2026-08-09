@@ -1,0 +1,25 @@
+seed: 1337
+sample_rate: 16000
+
+paths:
+  data: data
+  runs: runs
+
+detector: reference
+
+dataset:
+  name: bootstrap
+  manifest: data/bootstrap/manifest.csv
+
+sanity:
+  expected_eer: null
+  tolerance: 0.05
+
+bootstrap:
+  n_boot: 1000
+
+dcf:
+  p_target: 0.05
+  c_miss: 1.0
+  c_fa: 1.0
+

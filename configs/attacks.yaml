@@ -1,0 +1,18 @@
+fgsm:
+  attack: fgsm
+  family: adversarial_attacks
+  param: snr_db
+  levels: [40, 30, 20, 10]
+  options:
+    budget: snr
+
+pgd:
+  attack: pgd
+  family: adversarial_attacks
+  param: snr_db
+  levels: [40, 30, 20, 10]
+  options:
+    budget: snr
+    steps: 10
+    alpha_ratio: 0.25
+

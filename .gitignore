@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+figures/out/
+runs/
+data/
+*.wav
+.DS_Store

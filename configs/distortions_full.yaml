@@ -1,0 +1,108 @@
+noise:
+  kind: noise
+  family: natural_distortions
+  param: snr_db
+  severity_sign: -1.0
+  levels: [30, 20, 15, 10, 5, 0]
+  options:
+    color: pink
+
+chirp:
+  kind: noise
+  family: natural_distortions
+  param: snr_db
+  severity_sign: -1.0
+  levels: [25, 20, 15, 10, 5]
+  options:
+    color: chirp
+
+real_noise:
+  kind: noise
+  family: natural_distortions_real
+  param: snr_db
+  severity_sign: -1.0
+  levels: [30, 20, 15, 10, 5, 0]
+  options:
+    color: file
+    corpus: data/corpora/musan_noise
+
+real_bird:
+  kind: noise
+  family: natural_distortions_real
+  param: snr_db
+  severity_sign: -1.0
+  levels: [25, 20, 15, 10, 5]
+  options:
+    color: file
+    corpus: data/corpora/esc50_birds
+
+reverb:
+  kind: reverb
+  family: natural_distortions
+  param: rt60_s
+  severity_sign: 1.0
+  levels: [0.1, 0.3, 0.5, 0.7, 0.9]
+  options: {}
+
+real_rir:
+  kind: reverb
+  family: natural_distortions_real
+  param: rt60_s
+  severity_sign: 1.0
+  levels: [0, 1, 2, 3, 4]
+  options:
+    rir_dir: data/corpora/rirs
+
+codec:
+  kind: codec
+  family: codec_compression
+  param: bitrate_kbps
+  severity_sign: -1.0
+  levels: [128, 64, 32, 24, 16, 8]
+  options:
+    codec: mp3
+
+telephony_g711a:
+  kind: codec
+  family: channel_telephony
+  param: bitrate_kbps
+  severity_sign: -1.0
+  levels: [64]
+  options:
+    codec: g711a
+
+telephony_g711u:
+  kind: codec
+  family: channel_telephony
+  param: bitrate_kbps
+  severity_sign: -1.0
+  levels: [64]
+  options:
+    codec: g711u
+
+telephony_g722:
+  kind: codec
+  family: channel_telephony
+  param: bitrate_kbps
+  severity_sign: -1.0
+  levels: [64]
+  options:
+    codec: g722
+
+telephony_amrnb:
+  kind: codec
+  family: channel_telephony
+  param: bitrate_kbps
+  severity_sign: -1.0
+  levels: [12, 7, 4]
+  options:
+    codec: amrnb
+
+neural_encodec:
+  kind: neural_codec
+  family: codec_neural
+  param: bandwidth_kbps
+  severity_sign: -1.0
+  levels: [24, 12, 6, 3, 1.5]
+  options: {}
+
