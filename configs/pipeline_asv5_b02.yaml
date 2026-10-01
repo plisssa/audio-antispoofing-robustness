@@ -1,0 +1,11 @@
+runs: runs_asv5b
+
+stages:
+  - name: run_asv5_aasist_asv5
+    type: run
+    optional: true
+    params: {detector: aasist_asv5, manifest: data/asvspoof5/manifest.csv, run_dir: runs_asv5b/pipeline/aasist_asv5_asv5}
+  - name: align_asv5_aasist_pair
+    type: align
+    optional: true
+    params: {detector: [aasist, aasist_asv5], manifest: data/asvspoof5/manifest.csv, n: 300, seed: 1337, run_dir: runs_asv5b/pipeline/align_aasist_pair}

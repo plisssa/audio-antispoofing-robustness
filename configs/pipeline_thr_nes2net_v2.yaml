@@ -1,0 +1,7 @@
+runs: runs_thr_a
+
+stages:
+  - name: threshold_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_thr_mid_warm.yaml, run_dir: runs_strength/pipeline/nes2net_v2_asv19_threshold}

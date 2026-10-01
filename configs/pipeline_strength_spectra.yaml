@@ -1,0 +1,7 @@
+runs: runs_strength_spectra
+
+stages:
+  - name: attack_strength_spectra_asv19
+    type: attack
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength_spectra.yaml, run_dir: runs_strength/pipeline/spectra_asv19_strength}

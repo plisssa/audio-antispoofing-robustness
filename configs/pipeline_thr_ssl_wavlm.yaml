@@ -1,0 +1,11 @@
+runs: runs_thr_c
+
+stages:
+  - name: threshold_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_thr_mid.yaml, run_dir: runs_strength/pipeline/ssl_aasist_asv19_threshold}
+  - name: threshold_wavlm_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/native_strength.csv, attacks: configs/attacks_thr_high.yaml, run_dir: runs_strength/pipeline/wavlm_linear_asv19_threshold}

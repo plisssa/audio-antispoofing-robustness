@@ -1,0 +1,43 @@
+runs: runs_large
+
+stages:
+  - name: verify_large_asv19
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/asvspoof2019_la/eval_large.csv}
+  - name: verify_large_itw
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/in_the_wild/manifest_large.csv}
+  - name: verify_large_asv21
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/asvspoof2021_la/eval_large.csv}
+
+  - name: sweep_large_asv19
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native_large.csv, only: [gain], run_dir: runs_large/pipeline/large_asv19_sweep}
+  - name: sweep_large_itw
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain_large.csv, only: [gain], run_dir: runs_large/pipeline/large_itw_sweep}
+  - name: sweep_large_asv21
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain21_large.csv, only: [gain], run_dir: runs_large/pipeline/large_asv21_sweep}
+
+  - name: combine_large
+    type: combine
+    always: true
+    params:
+      out: runs_large/pipeline/combined
+      error_table:
+        - runs_large/pipeline/large_asv19_sweep/error_table.csv
+        - runs_large/pipeline/large_itw_sweep/error_table.csv
+        - runs_large/pipeline/large_asv21_sweep/error_table.csv
+  - name: report_large
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_large.yaml, out: runs_large/pipeline/report}

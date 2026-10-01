@@ -1,0 +1,11 @@
+runs: runs_spectrafix
+
+stages:
+  - name: attack_matrix_spectra_fixed_asv19
+    type: attack
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/native.csv, transfer: [aasist, aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs_spectrafix/pipeline/spectra_asv19_attack_matrix}
+  - name: attack_fine_spectra_fixed_asv19
+    type: attack
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_spectrafix/pipeline/spectra_asv19_attack_fine}

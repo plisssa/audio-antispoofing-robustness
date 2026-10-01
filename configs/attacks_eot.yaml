@@ -1,0 +1,21 @@
+pgd_eot:
+  attack: pgd_eot
+  family: adversarial_attacks
+  param: snr_db
+  levels: [40, 30]
+  options:
+    budget: snr
+    steps: 10
+    alpha_ratio: 0.25
+    eot_samples: 4
+    noise_snr_db: 20.0
+
+pgd:
+  attack: pgd
+  family: adversarial_attacks
+  param: snr_db
+  levels: [40, 30]
+  options:
+    budget: snr
+    steps: 10
+    alpha_ratio: 0.25

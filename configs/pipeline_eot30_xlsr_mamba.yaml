@@ -1,0 +1,13 @@
+runs: runs_eot30_xlsr_mamba
+
+stages:
+  - name: attack_eot30_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, attacks: configs/attacks_eot30.yaml, defences: configs/defences_noise.yaml, run_dir: runs_eot30_xlsr_mamba/pipeline/xlsr_mamba_asv19_eot30}
+
+  - name: report_eot30_xlsr_mamba
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_eot30_xlsr_mamba.yaml, out: runs_eot30_xlsr_mamba/pipeline/report}

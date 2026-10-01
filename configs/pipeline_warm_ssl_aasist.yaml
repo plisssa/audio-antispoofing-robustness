@@ -1,0 +1,7 @@
+runs: runs_warm_ssl_aasist
+
+stages:
+  - name: attack_warm_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_warm_xlsr_mamba.yaml, run_dir: runs_diag/pipeline/ssl_aasist_asv19_warm}

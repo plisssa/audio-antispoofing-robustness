@@ -1,0 +1,10 @@
+pgd_strong:
+  attack: pgd_restarts
+  family: adversarial_attacks
+  param: snr_db
+  levels: [65, 70]
+  options:
+    budget: snr
+    steps: 100
+    restarts: 3
+    alpha_ratio: 0.025

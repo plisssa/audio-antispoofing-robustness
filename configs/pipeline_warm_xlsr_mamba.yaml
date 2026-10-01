@@ -1,0 +1,7 @@
+runs: runs_warm_xlsr_mamba
+
+stages:
+  - name: attack_warm_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native_strength.csv, attacks: configs/attacks_warm.yaml, run_dir: runs_diag/pipeline/xlsr_mamba_asv19_warm}

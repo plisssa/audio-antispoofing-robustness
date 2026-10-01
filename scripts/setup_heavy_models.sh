@@ -3,7 +3,9 @@ set -uo pipefail
 
 cd "$HOME/adfd-robustness"
 module purge
-module load Python/PyTorch_GPU_v2.4
+PYTORCH_ENV="${PYTORCH_ENV:-/opt/software/python/envs/pytorch2_4}"
+[ -x "$PYTORCH_ENV/bin/python" ] || { echo "base python env missing: $PYTORCH_ENV" >&2; exit 1; }
+export PATH="$PYTORCH_ENV/bin:$PATH"
 source .venv/bin/activate
 mkdir -p third_party
 

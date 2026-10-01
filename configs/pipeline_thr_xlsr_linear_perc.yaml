@@ -1,0 +1,11 @@
+runs: runs_thr_d
+
+stages:
+  - name: perceptual_asv19
+    type: perceptual
+    optional: true
+    params: {detector: [aasist, ssl_aasist, spectra_aasist3], manifest: data/reference/native_strength.csv, attacks: configs/attacks_perceptual.yaml, n: 40, seed: 1337, save_n: 4, run_dir: runs_perceptual/pipeline/perceptual_asv19}
+  - name: threshold_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native_strength.csv, attacks: configs/attacks_thr_high.yaml, run_dir: runs_strength/pipeline/xlsr_linear_asv19_threshold}

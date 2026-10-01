@@ -1,0 +1,14 @@
+noise_30db:
+  kind: noise
+  level: 30
+  options: {color: pink}
+
+noise_20db:
+  kind: noise
+  level: 20
+  options: {color: pink}
+
+encodec_24:
+  kind: neural_codec
+  level: 24
+  options: {}

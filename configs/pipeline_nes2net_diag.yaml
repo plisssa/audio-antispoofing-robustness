@@ -1,0 +1,11 @@
+runs: runs_diag
+
+stages:
+  - name: gradcheck_asv19
+    type: gradcheck
+    optional: true
+    params: {detector: [nes2net_v2, ssl_aasist, xlsr_mamba, aasist], manifest: data/reference/native_strength.csv, n: 40, seed: 1337, run_dir: runs_diag/pipeline/gradcheck_asv19}
+  - name: attack_margin_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_margin.yaml, run_dir: runs_diag/pipeline/nes2net_v2_asv19_margin}

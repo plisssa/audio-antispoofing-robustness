@@ -155,6 +155,124 @@ stages:
     optional: true
     params: {detector: [nes2net], manifest: data/in_the_wild/manifest_small.csv, run_dir: runs/pipeline/nes2net_itw_sweep}
 
+
+  - name: sweep_xlsr_linear_asv19
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_linear], manifest: data/reference/native.csv, run_dir: runs/pipeline/xlsr_linear_asv19_sweep}
+  - name: sweep_xlsr_linear_itw
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_linear], manifest: data/reference/crossdomain.csv, run_dir: runs/pipeline/xlsr_linear_itw_sweep}
+  - name: sweep_xlsr_linear_asv21
+    type: sweep
+    optional: true
+    params: {detector: [xlsr_linear], manifest: data/reference/crossdomain21.csv, run_dir: runs/pipeline/xlsr_linear_asv21_sweep}
+  - name: sweep_wavlm_linear_asv19
+    type: sweep
+    optional: true
+    params: {detector: [wavlm_linear], manifest: data/reference/native.csv, run_dir: runs/pipeline/wavlm_linear_asv19_sweep}
+  - name: sweep_wavlm_linear_itw
+    type: sweep
+    optional: true
+    params: {detector: [wavlm_linear], manifest: data/reference/crossdomain.csv, run_dir: runs/pipeline/wavlm_linear_itw_sweep}
+  - name: sweep_wavlm_linear_asv21
+    type: sweep
+    optional: true
+    params: {detector: [wavlm_linear], manifest: data/reference/crossdomain21.csv, run_dir: runs/pipeline/wavlm_linear_asv21_sweep}
+  - name: sweep_nes2net_v2_asv19
+    type: sweep
+    optional: true
+    params: {detector: [nes2net_v2], manifest: data/reference/native.csv, run_dir: runs/pipeline/nes2net_v2_asv19_sweep}
+  - name: sweep_nes2net_v2_itw
+    type: sweep
+    optional: true
+    params: {detector: [nes2net_v2], manifest: data/reference/crossdomain.csv, run_dir: runs/pipeline/nes2net_v2_itw_sweep}
+  - name: sweep_nes2net_v2_asv21
+    type: sweep
+    optional: true
+    params: {detector: [nes2net_v2], manifest: data/reference/crossdomain21.csv, run_dir: runs/pipeline/nes2net_v2_asv21_sweep}
+
+  - name: sweep_real_itw_all
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain.csv, distortions: configs/distortions_full.yaml, only: [real_noise, real_bird, real_rir], run_dir: runs/pipeline/real_itw_all_sweep}
+
+  - name: sweep_laundering_asv19
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native.csv, distortions: configs/distortions_full.yaml, only: [laundering], run_dir: runs/pipeline/laundering_asv19_sweep}
+  - name: sweep_laundering_itw
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain.csv, distortions: configs/distortions_full.yaml, only: [laundering], run_dir: runs/pipeline/laundering_itw_sweep}
+  - name: sweep_shortcut_asv19
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native.csv, distortions: configs/distortions_full.yaml, only: [trim_lead, pad_lead, lead_energy], run_dir: runs/pipeline/shortcut_asv19_sweep}
+  - name: sweep_shortcut_itw
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain.csv, distortions: configs/distortions_full.yaml, only: [trim_lead, pad_lead, lead_energy], run_dir: runs/pipeline/shortcut_itw_sweep}
+
+  - name: sweep_codec_all_asv19
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native.csv, distortions: configs/distortions_full.yaml, only: [telephony_g711a, telephony_g711u, telephony_g722, neural_encodec], run_dir: runs/pipeline/codec_all_asv19_sweep}
+  - name: sweep_codec_all_itw
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain.csv, distortions: configs/distortions_full.yaml, only: [telephony_g711a, telephony_g711u, telephony_g722, neural_encodec], run_dir: runs/pipeline/codec_all_itw_sweep}
+  - name: sweep_codec_all_asv21
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain21.csv, distortions: configs/distortions_full.yaml, only: [telephony_g711a, telephony_g711u, telephony_g722, neural_encodec], run_dir: runs/pipeline/codec_all_asv21_sweep}
+
+  - name: sweep_noise_fine_asv19
+    type: sweep
+    optional: true
+    params: {detector: [reference, aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native.csv, distortions: configs/distortions_full.yaml, only: [noise_fine, noise_fine_real], run_dir: runs/pipeline/noise_fine_asv19_sweep}
+
+  - name: attack_matrix_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native.csv, transfer: [aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/aasist_asv19_attack_matrix}
+  - name: attack_matrix_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist3, manifest: data/reference/native.csv, transfer: [aasist, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/aasist3_asv19_attack_matrix}
+  - name: attack_matrix_spectra_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/native.csv, transfer: [aasist, aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/spectra_aasist3_asv19_attack_matrix}
+  - name: attack_matrix_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/rawnet2_asv19_attack_matrix}
+  - name: attack_matrix_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/ssl_aasist_asv19_attack_matrix}
+  - name: attack_matrix_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/xlsr_mamba_asv19_attack_matrix}
+  - name: attack_matrix_nes2net_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, xlsr_linear, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/nes2net_asv19_attack_matrix}
+  - name: attack_matrix_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, wavlm_linear, nes2net_v2], run_dir: runs/pipeline/xlsr_linear_asv19_attack_matrix}
+  - name: attack_matrix_wavlm_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, nes2net_v2], run_dir: runs/pipeline/wavlm_linear_asv19_attack_matrix}
+  - name: attack_matrix_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear], run_dir: runs/pipeline/nes2net_v2_asv19_attack_matrix}
   - name: combine_all
     type: combine
     always: true
@@ -169,15 +287,15 @@ stages:
         - runs/pipeline/aasist3_itw_sweep/error_table.csv
         - runs/pipeline/spectra_asv19_sweep/error_table.csv
         - runs/pipeline/spectra_itw_sweep/error_table.csv
+        - runs/pipeline/real_itw_sweep/error_table.csv
+        - runs/pipeline/telephony_asv19_sweep/error_table.csv
+        - runs/pipeline/encodec_asv19_sweep/error_table.csv
         - runs/pipeline/aasist_asv21_sweep/error_table.csv
         - runs/pipeline/aasist3_asv21_sweep/error_table.csv
         - runs/pipeline/spectra_asv21_sweep/error_table.csv
-        - runs/pipeline/real_itw_sweep/error_table.csv
         - runs/pipeline/rawnet2_asv19_sweep/error_table.csv
         - runs/pipeline/ssl_aasist_asv19_sweep/error_table.csv
         - runs/pipeline/xlsr_mamba_asv19_sweep/error_table.csv
-        - runs/pipeline/nes2net_asv19_sweep/error_table.csv
-        - runs/pipeline/nes2net_itw_sweep/error_table.csv
         - runs/pipeline/ssl_aasist_itw_sweep/error_table.csv
         - runs/pipeline/ssl_aasist_asv21_sweep/error_table.csv
         - runs/pipeline/rawnet2_itw_sweep/error_table.csv
@@ -187,6 +305,26 @@ stages:
         - runs/pipeline/xlsr_mamba_itw_sweep/error_table.csv
         - runs/pipeline/xlsr_mamba_asv21_sweep/error_table.csv
         - runs/pipeline/reference_asv21_sweep/error_table.csv
+        - runs/pipeline/nes2net_asv19_sweep/error_table.csv
+        - runs/pipeline/nes2net_itw_sweep/error_table.csv
+        - runs/pipeline/xlsr_linear_asv19_sweep/error_table.csv
+        - runs/pipeline/xlsr_linear_itw_sweep/error_table.csv
+        - runs/pipeline/xlsr_linear_asv21_sweep/error_table.csv
+        - runs/pipeline/wavlm_linear_asv19_sweep/error_table.csv
+        - runs/pipeline/wavlm_linear_itw_sweep/error_table.csv
+        - runs/pipeline/wavlm_linear_asv21_sweep/error_table.csv
+        - runs/pipeline/nes2net_v2_asv19_sweep/error_table.csv
+        - runs/pipeline/nes2net_v2_itw_sweep/error_table.csv
+        - runs/pipeline/nes2net_v2_asv21_sweep/error_table.csv
+        - runs/pipeline/real_itw_all_sweep/error_table.csv
+        - runs/pipeline/laundering_asv19_sweep/error_table.csv
+        - runs/pipeline/laundering_itw_sweep/error_table.csv
+        - runs/pipeline/shortcut_asv19_sweep/error_table.csv
+        - runs/pipeline/shortcut_itw_sweep/error_table.csv
+        - runs/pipeline/codec_all_asv19_sweep/error_table.csv
+        - runs/pipeline/codec_all_itw_sweep/error_table.csv
+        - runs/pipeline/codec_all_asv21_sweep/error_table.csv
+        - runs/pipeline/noise_fine_asv19_sweep/error_table.csv
   - name: inverse_all
     type: inverse
     always: true
@@ -213,4 +351,3 @@ stages:
     always: true
     optional: true
     params: {pipeline: configs/pipeline.yaml, out: runs/pipeline/report}
-

@@ -1,0 +1,7 @@
+runs: runs_diag_control
+
+stages:
+  - name: attack_margin_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_margin.yaml, run_dir: runs_diag/pipeline/ssl_aasist_asv19_margin}

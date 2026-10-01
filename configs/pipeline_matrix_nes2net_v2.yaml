@@ -1,0 +1,7 @@
+runs: runs
+
+stages:
+  - name: attack_matrix_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native.csv, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear], run_dir: runs/pipeline/nes2net_v2_asv19_attack_matrix}

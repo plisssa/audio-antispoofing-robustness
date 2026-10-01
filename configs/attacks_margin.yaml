@@ -1,0 +1,10 @@
+pgd_margin:
+  attack: pgd_margin
+  family: adversarial_attacks
+  param: snr_db
+  levels: [50, 45]
+  options:
+    budget: snr
+    steps: 100
+    restarts: 3
+    alpha_ratio: 0.025

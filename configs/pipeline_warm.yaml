@@ -1,0 +1,7 @@
+runs: runs_warm
+
+stages:
+  - name: attack_warm_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_warm.yaml, run_dir: runs_diag/pipeline/nes2net_v2_asv19_warm}

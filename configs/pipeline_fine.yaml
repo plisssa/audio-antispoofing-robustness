@@ -1,0 +1,105 @@
+runs: runs_fine
+
+stages:
+  - name: attack_fine_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/aasist_asv19_attack_fine}
+  - name: attack_fine_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist3, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/aasist3_asv19_attack_fine}
+  - name: attack_fine_spectra_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/spectra_aasist3_asv19_attack_fine}
+  - name: attack_fine_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/rawnet2_asv19_attack_fine}
+  - name: attack_fine_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/ssl_aasist_asv19_attack_fine}
+  - name: attack_fine_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/xlsr_mamba_asv19_attack_fine}
+  - name: attack_fine_nes2net_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/nes2net_asv19_attack_fine}
+  - name: attack_fine_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/xlsr_linear_asv19_attack_fine}
+  - name: attack_fine_wavlm_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/wavlm_linear_asv19_attack_fine}
+  - name: attack_fine_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native.csv, attacks: configs/attacks_fine.yaml, run_dir: runs_fine/pipeline/nes2net_v2_asv19_attack_fine}
+
+  - name: attack_xlsr_mamba_itw
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/crossdomain.csv, transfer: [ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/xlsr_mamba_itw_attack}
+  - name: attack_xlsr_mamba_asv21
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/crossdomain21.csv, transfer: [ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/xlsr_mamba_asv21_attack}
+  - name: attack_ssl_aasist_itw
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, xlsr_linear, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/ssl_aasist_itw_attack}
+  - name: attack_ssl_aasist_asv21
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, xlsr_linear, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/ssl_aasist_asv21_attack}
+  - name: attack_xlsr_linear_itw
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, ssl_aasist, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/xlsr_linear_itw_attack}
+  - name: attack_xlsr_linear_asv21
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, ssl_aasist, nes2net_v2, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/xlsr_linear_asv21_attack}
+  - name: attack_nes2net_v2_itw
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/nes2net_v2_itw_attack}
+  - name: attack_nes2net_v2_asv21
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, wavlm_linear, nes2net, aasist], run_dir: runs_fine/pipeline/nes2net_v2_asv21_attack}
+  - name: attack_wavlm_linear_itw
+    type: attack
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, nes2net, aasist], run_dir: runs_fine/pipeline/wavlm_linear_itw_attack}
+  - name: attack_wavlm_linear_asv21
+    type: attack
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, nes2net, aasist], run_dir: runs_fine/pipeline/wavlm_linear_asv21_attack}
+  - name: attack_nes2net_itw
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, aasist], run_dir: runs_fine/pipeline/nes2net_itw_attack}
+  - name: attack_nes2net_asv21
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, aasist], run_dir: runs_fine/pipeline/nes2net_asv21_attack}
+  - name: attack_aasist_itw
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/crossdomain.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, nes2net], run_dir: runs_fine/pipeline/aasist_itw_attack}
+  - name: attack_aasist_asv21
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/crossdomain21.csv, transfer: [xlsr_mamba, ssl_aasist, xlsr_linear, nes2net_v2, wavlm_linear, nes2net], run_dir: runs_fine/pipeline/aasist_asv21_attack}
+  - name: report_fine
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_fine.yaml, out: runs_fine/pipeline/report}

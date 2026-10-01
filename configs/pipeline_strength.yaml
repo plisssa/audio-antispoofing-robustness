@@ -1,0 +1,27 @@
+runs: runs_strength
+
+stages:
+  - name: attack_strength_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/aasist_asv19_strength}
+  - name: attack_strength_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/rawnet2_asv19_strength}
+  - name: attack_strength_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/ssl_aasist_asv19_strength}
+  - name: attack_strength_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/xlsr_mamba_asv19_strength}
+  - name: attack_strength_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/nes2net_v2_asv19_strength}
+  - name: attack_strength_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native_strength.csv, attacks: configs/attacks_strength.yaml, run_dir: runs_strength/pipeline/xlsr_linear_asv19_strength}

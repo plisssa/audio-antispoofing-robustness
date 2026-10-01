@@ -1,0 +1,7 @@
+runs: runs_thr_b
+
+stages:
+  - name: threshold_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native_strength.csv, attacks: configs/attacks_thr_mid_warm.yaml, run_dir: runs_strength/pipeline/xlsr_mamba_asv19_threshold}

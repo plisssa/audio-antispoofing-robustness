@@ -1,0 +1,49 @@
+%%{init: {'flowchart': {'curve':'linear'}}}%%
+flowchart TB
+  S(["1 · sbatch scripts/slurm_pipeline.sh"]):::term
+  PREP[/"2 · prepare_login.sh (login-узел, есть интернет):<br/>датасеты · корпуса · веса · манифесты · подвыборки · merge → offline-кэш"/]:::data
+  LOAD["3 · adfd pipeline читает configs/pipeline.yaml (список стадий)"]:::proc
+  A(("А")):::conn
+  NEXT{"4 · Есть стадия?"}:::dec
+  DONE{"5 · Маркер .done есть?"}:::dec
+  CACHED["6 · cached — пропустить"]:::skip
+  RUN[["7 · Выполнить стадию по типу:<br/>manifest · subset · sweep · attack · combine · inverse · report"]]:::sub
+  OK{"8 · Успех?"}:::dec
+  MARK["9 · Записать .done"]:::proc
+  OPT{"10 · Стадия optional?"}:::dec
+  SKIP["11 · Пометить skipped + warn"]:::skip
+  STOP(["12 · STOP — fail-fast, записать статус"]):::stopn
+  R(("Р")):::conn
+  REP[/"13 · runs/pipeline/report/: CSV сравнения + графики + report.md"/]:::data
+  FIN(["14 · Готово: pipeline summary"]):::term
+
+  S --> PREP --> LOAD --> A --> NEXT
+  NEXT -->|"да"| DONE
+  NEXT -->|"нет (все стадии)"| R
+  DONE -->|"да"| CACHED --> A
+  DONE -->|"нет"| RUN --> OK
+  OK -->|"да"| MARK --> A
+  OK -->|"нет"| OPT
+  OPT -->|"да"| SKIP --> A
+  OPT -->|"нет"| STOP
+  R --> REP --> FIN
+
+  subgraph SW ["Подпрограмма sweep / attack (раскрытие блока 7)"]
+    direction TB
+    LD["Загрузить детектор; fit если обучаемый"]:::proc
+    CL["Clean-скоринг → порог t*"]:::proc
+    LP["Для каждого семпла: искажение/атака по сетке силы<br/>→ score, Δscore (атака: ε из SNR, перенос на др. модели)"]:::proc
+    PC[/"дозапись в partial.csv (resume после requeue)"/]:::data
+    AG["Агрегация: ΔEER±CI, ASR, монотонность"]:::proc
+    LD --> CL --> LP --> PC --> AG
+  end
+  RUN -. "разворачивается в" .-> SW
+
+  classDef term fill:#eceeef,stroke:#6b7280,color:#374151
+  classDef data fill:#e7f6ec,stroke:#2f9e5a,color:#14532d
+  classDef proc fill:#e6f1fb,stroke:#2f7fd1,color:#0c447c
+  classDef dec  fill:#fdf1dd,stroke:#d69a2f,color:#7a4d0c
+  classDef sub  fill:#efe9fb,stroke:#7c5cd6,color:#3c2a7a
+  classDef skip fill:#f0f1f2,stroke:#9aa0a6,color:#4b5563
+  classDef stopn fill:#fdeaea,stroke:#d64545,color:#7a1c1c
+  classDef conn fill:#fdf1dd,stroke:#d69a2f,color:#7a4d0c

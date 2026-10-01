@@ -1,0 +1,10 @@
+square:
+  attack: square
+  family: adversarial_attacks
+  param: snr_db
+  levels: [50, 45]
+  options:
+    budget: snr
+    queries: 1000
+    p_init: 0.8
+    candidates: 1

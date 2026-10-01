@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=adfd-sweep
-#SBATCH --account=proj_1877
+#SBATCH --account=proj_1912
 #SBATCH --partition=rocky
 #SBATCH --constraint=type_a|type_b
 #SBATCH --gpus=1
@@ -13,7 +13,9 @@
 set -euo pipefail
 
 module purge
-module load Python/PyTorch_GPU_v2.4
+PYTORCH_ENV="${PYTORCH_ENV:-/opt/software/python/envs/pytorch2_4}"
+[ -x "$PYTORCH_ENV/bin/python" ] || { echo "base python env missing: $PYTORCH_ENV" >&2; exit 1; }
+export PATH="$PYTORCH_ENV/bin:$PATH"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:-}:/opt/software/python/envs/tensorflow-gpu2_9/lib"
 source .venv/bin/activate
 export HF_HUB_OFFLINE=1

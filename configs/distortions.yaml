@@ -68,4 +68,3 @@ bandpass:
   levels: [8000, 6000, 4000, 3400, 2000]
   options:
     low_hz: 100
-

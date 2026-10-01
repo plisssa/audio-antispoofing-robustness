@@ -1,0 +1,15 @@
+runs: runs_seeds_xa
+
+stages:
+  - name: seed_transfer_xlsr_linear
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native_strength.csv, attacks: configs/attacks_seed_transfer.yaml, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, nes2net_v2, wavlm_linear], run_dir: runs_seeds/pipeline/xlsr_linear_transfer}
+  - name: seed_transfer_xlsr_linear_s2
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear_s2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_seed_transfer.yaml, transfer: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, nes2net_v2, wavlm_linear], run_dir: runs_seeds/pipeline/xlsr_linear_s2_transfer}
+  - name: seed_threshold_xlsr_linear_s2
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear_s2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_seed_thr_xlsr.yaml, run_dir: runs_seeds/pipeline/xlsr_linear_s2_threshold}

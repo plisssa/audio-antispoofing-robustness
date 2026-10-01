@@ -1,0 +1,54 @@
+runs: runs_asv5
+
+stages:
+  - name: merge_asv5
+    type: merge
+    params: {train_from: data/asvspoof2019_la/train_small.csv, eval_from: data/asvspoof5/manifest.csv, out: data/reference/crossdomain5.csv}
+  - name: verify_asv5
+    type: verify-dataset
+    optional: true
+    params: {manifest: data/asvspoof5/manifest.csv}
+  - name: run_asv5_reference
+    type: run
+    optional: true
+    params: {detector: reference, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/reference_asv5}
+  - name: run_asv5_aasist
+    type: run
+    optional: true
+    params: {detector: aasist, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/aasist_asv5}
+  - name: run_asv5_aasist3
+    type: run
+    optional: true
+    params: {detector: aasist3, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/aasist3_asv5}
+  - name: run_asv5_spectra_aasist3
+    type: run
+    optional: true
+    params: {detector: spectra_aasist3, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/spectra_aasist3_asv5}
+  - name: run_asv5_rawnet2
+    type: run
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/rawnet2_asv5}
+  - name: run_asv5_ssl_aasist
+    type: run
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/ssl_aasist_asv5}
+  - name: run_asv5_xlsr_mamba
+    type: run
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/xlsr_mamba_asv5}
+  - name: run_asv5_nes2net
+    type: run
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/nes2net_asv5}
+  - name: run_asv5_xlsr_linear
+    type: run
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/xlsr_linear_asv5}
+  - name: run_asv5_wavlm_linear
+    type: run
+    optional: true
+    params: {detector: wavlm_linear, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/wavlm_linear_asv5}
+  - name: run_asv5_nes2net_v2
+    type: run
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/crossdomain5.csv, run_dir: runs_asv5/pipeline/nes2net_v2_asv5}

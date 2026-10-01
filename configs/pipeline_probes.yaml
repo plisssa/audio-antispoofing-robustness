@@ -1,0 +1,32 @@
+runs: runs_probes
+
+stages:
+  - name: attack_probe_hubert_linear_itw
+    type: attack
+    optional: true
+    params: {detector: hubert_linear, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [hubert_mlp, ssl_aasist, xlsr_linear, wavlm_linear, aasist, w2v2lv60_linear, wavlmbase_linear], run_dir: runs_probes/pipeline/hubert_linear_itw_attack}
+  - name: attack_probe_hubert_mlp_itw
+    type: attack
+    optional: true
+    params: {detector: hubert_mlp, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [hubert_linear, ssl_aasist, xlsr_linear, wavlm_linear, aasist, w2v2lv60_linear, wavlmbase_linear], run_dir: runs_probes/pipeline/hubert_mlp_itw_attack}
+  - name: attack_probe_w2v2lv60_linear_itw
+    type: attack
+    optional: true
+    params: {detector: w2v2lv60_linear, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [w2v2lv60_mlp, ssl_aasist, xlsr_linear, wavlm_linear, aasist, hubert_linear, wavlmbase_linear], run_dir: runs_probes/pipeline/w2v2lv60_linear_itw_attack}
+  - name: attack_probe_w2v2lv60_mlp_itw
+    type: attack
+    optional: true
+    params: {detector: w2v2lv60_mlp, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [w2v2lv60_linear, ssl_aasist, xlsr_linear, wavlm_linear, aasist, hubert_linear, wavlmbase_linear], run_dir: runs_probes/pipeline/w2v2lv60_mlp_itw_attack}
+  - name: attack_probe_wavlmbase_linear_itw
+    type: attack
+    optional: true
+    params: {detector: wavlmbase_linear, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [wavlmbase_mlp, ssl_aasist, xlsr_linear, wavlm_linear, aasist, hubert_linear, w2v2lv60_linear], run_dir: runs_probes/pipeline/wavlmbase_linear_itw_attack}
+  - name: attack_probe_wavlmbase_mlp_itw
+    type: attack
+    optional: true
+    params: {detector: wavlmbase_mlp, manifest: data/reference/crossdomain.csv, attacks: configs/attacks_pgd20.yaml, transfer: [wavlmbase_linear, ssl_aasist, xlsr_linear, wavlm_linear, aasist, hubert_linear, w2v2lv60_linear], run_dir: runs_probes/pipeline/wavlmbase_mlp_itw_attack}
+
+  - name: align_probes_itw
+    type: align
+    optional: true
+    params: {detector: [aasist, ssl_aasist, xlsr_mamba, xlsr_linear, nes2net_v2, nes2net, wavlm_linear, hubert_linear, hubert_mlp, w2v2lv60_linear, w2v2lv60_mlp, wavlmbase_linear, wavlmbase_mlp], manifest: data/reference/crossdomain.csv, n: 300, seed: 1337, run_dir: runs_probes/pipeline/align_itw}

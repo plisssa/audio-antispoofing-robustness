@@ -1,0 +1,13 @@
+runs: runs_eot30_ssl_aasist
+
+stages:
+  - name: attack_eot30_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, attacks: configs/attacks_eot30.yaml, defences: configs/defences_noise.yaml, run_dir: runs_eot30_ssl_aasist/pipeline/ssl_aasist_asv19_eot30}
+
+  - name: report_eot30_ssl_aasist
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_eot30_ssl_aasist.yaml, out: runs_eot30_ssl_aasist/pipeline/report}

@@ -1,0 +1,11 @@
+runs: runs_seeds_v
+
+stages:
+  - name: seed_victims_ssl_aasist
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_seed_transfer.yaml, transfer: [xlsr_linear, xlsr_linear_s2, xlsr_linear_s3, xlsr_linear_s4, wavlm_linear, wavlm_linear_s2, wavlm_linear_s3, wavlm_linear_s4], run_dir: runs_seeds/pipeline/ssl_aasist_to_probes}
+  - name: seed_victims_nes2net
+    type: attack
+    optional: true
+    params: {detector: nes2net, manifest: data/reference/native_strength.csv, attacks: configs/attacks_seed_transfer.yaml, transfer: [xlsr_linear, xlsr_linear_s2, xlsr_linear_s3, xlsr_linear_s4, wavlm_linear, wavlm_linear_s2, wavlm_linear_s3, wavlm_linear_s4], run_dir: runs_seeds/pipeline/nes2net_to_probes}

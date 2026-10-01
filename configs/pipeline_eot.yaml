@@ -1,0 +1,17 @@
+runs: runs_eot
+
+stages:
+  - name: attack_eot_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, attacks: configs/attacks_eot.yaml, defences: configs/defences_noise.yaml, run_dir: runs_eot/pipeline/ssl_aasist_asv19_eot}
+  - name: attack_eot_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, attacks: configs/attacks_eot.yaml, defences: configs/defences_noise.yaml, run_dir: runs_eot/pipeline/xlsr_mamba_asv19_eot}
+
+  - name: report_eot
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_eot.yaml, out: runs_eot/pipeline/report}

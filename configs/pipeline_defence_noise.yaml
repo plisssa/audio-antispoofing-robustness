@@ -1,0 +1,33 @@
+runs: runs_defence_noise
+
+stages:
+  - name: attack_defence_noise_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/aasist_asv19_defence}
+  - name: attack_defence_noise_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/ssl_aasist_asv19_defence}
+  - name: attack_defence_noise_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/xlsr_mamba_asv19_defence}
+  - name: attack_defence_noise_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/xlsr_linear_asv19_defence}
+  - name: attack_defence_noise_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist3, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/aasist3_asv19_defence}
+  - name: attack_defence_noise_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences_noise.yaml, run_dir: runs_defence_noise/pipeline/nes2net_v2_asv19_defence}
+
+  - name: report_defence_noise
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_defence_noise.yaml, out: runs_defence_noise/pipeline/report}

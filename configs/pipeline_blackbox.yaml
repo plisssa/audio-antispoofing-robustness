@@ -1,0 +1,15 @@
+runs: runs_blackbox
+
+stages:
+  - name: attack_blackbox_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_blackbox.yaml, run_dir: runs_blackbox/pipeline/aasist_asv19_blackbox}
+  - name: attack_blackbox_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_blackbox.yaml, run_dir: runs_blackbox/pipeline/rawnet2_asv19_blackbox}
+  - name: attack_blackbox_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_blackbox.yaml, run_dir: runs_blackbox/pipeline/ssl_aasist_asv19_blackbox}

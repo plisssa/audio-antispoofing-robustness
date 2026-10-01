@@ -17,6 +17,13 @@ aasist:
   spoof_index: 0
   crop: 64600
 
+aasist_asv5:
+  repo_path: third_party/asvspoof5/Baseline-AASIST
+  config: third_party/asvspoof5/Baseline-AASIST/config/AASIST_ASVspoof5.conf
+  checkpoint: third_party/asvspoof5/Baseline-AASIST/models/weights/AASIST/best.pth
+  spoof_index: 0
+  crop: 64600
+
 rawnet2:
   repo_path: third_party/rawnet2
   config: third_party/rawnet2/model_config_RawNet.yaml
@@ -38,6 +45,63 @@ xlsr_mamba:
   crop: 64600
   extra: {emb_size: 144, num_encoders: 12}
 
+xlsr_linear:
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+wavlm_linear:
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+hubert_linear:
+  label: hubert_linear
+  model_id: facebook/hubert-large-ll60k
+  head: linear
+  crop: 64600
+
+hubert_mlp:
+  label: hubert_mlp
+  model_id: facebook/hubert-large-ll60k
+  head: mlp
+  crop: 64600
+
+w2v2lv60_linear:
+  label: w2v2lv60_linear
+  model_id: facebook/wav2vec2-large-lv60
+  head: linear
+  crop: 64600
+
+w2v2lv60_mlp:
+  label: w2v2lv60_mlp
+  model_id: facebook/wav2vec2-large-lv60
+  head: mlp
+  crop: 64600
+
+wavlmbase_linear:
+  label: wavlmbase_linear
+  model_id: microsoft/wavlm-base-plus
+  head: linear
+  crop: 64600
+
+wavlmbase_mlp:
+  label: wavlmbase_mlp
+  model_id: microsoft/wavlm-base-plus
+  head: mlp
+  crop: 64600
+
+nes2net_v2:
+  repo_path: third_party/Nes2Net_ASVspoof_ITW
+  checkpoint: third_party/Nes2Net_ASVspoof_ITW/nes2net_v2_LA.pth
+  spoof_index: 0
+  crop: 64600
+  extra: {n_output_logits: 2, dilation: 2, pool_func: mean, Nes_ratio: [8, 8], SE_ratio: [1]}
+
 nes2net:
   repo_path: third_party/Nes2Net
   checkpoint: third_party/Nes2Net/WavLM_Nes2Net_X.pth
@@ -45,3 +109,59 @@ nes2net:
   crop: 64000
   extra: {agg: SEA, dilation: 1, pool_func: mean, SE_ratio: [1], Nes_ratio: [8, 8]}
 
+xlsr_linear_s2:
+  label: xlsr_linear_s2
+  seed: 2
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+xlsr_linear_s3:
+  label: xlsr_linear_s3
+  seed: 3
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+xlsr_linear_s4:
+  label: xlsr_linear_s4
+  seed: 4
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+wavlm_linear_s2:
+  label: wavlm_linear_s2
+  model_id: microsoft/wavlm-large
+  seed: 2
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+wavlm_linear_s3:
+  label: wavlm_linear_s3
+  model_id: microsoft/wavlm-large
+  seed: 3
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001
+
+wavlm_linear_s4:
+  label: wavlm_linear_s4
+  model_id: microsoft/wavlm-large
+  seed: 4
+  crop: 64600
+  epochs: 40
+  batch_size: 32
+  feature_batch: 8
+  lr: 0.001

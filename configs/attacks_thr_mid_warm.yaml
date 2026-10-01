@@ -1,0 +1,45 @@
+pgd:
+  attack: pgd
+  family: adversarial_attacks
+  param: snr_db
+  levels: [60, 55]
+  options:
+    budget: snr
+    steps: 10
+    alpha_ratio: 0.25
+
+pgd_strong:
+  attack: pgd_restarts
+  family: adversarial_attacks
+  param: snr_db
+  levels: [60, 55]
+  options:
+    budget: snr
+    steps: 100
+    restarts: 3
+    alpha_ratio: 0.025
+
+transfer_ssl_aasist:
+  attack: surrogate_transfer
+  family: adversarial_attacks
+  param: snr_db
+  levels: [60, 55]
+  options:
+    budget: snr
+    surrogate: ssl_aasist
+    surrogate_steps: 100
+    surrogate_restarts: 3
+    alpha_ratio: 0.025
+
+warm_from_ssl_aasist:
+  attack: pgd_warm
+  family: adversarial_attacks
+  param: snr_db
+  levels: [60, 55]
+  options:
+    budget: snr
+    surrogate: ssl_aasist
+    surrogate_steps: 100
+    surrogate_restarts: 3
+    steps: 100
+    alpha_ratio: 0.025

@@ -1,0 +1,33 @@
+runs: runs_defence
+
+stages:
+  - name: attack_defence_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/aasist_asv19_defence}
+  - name: attack_defence_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/ssl_aasist_asv19_defence}
+  - name: attack_defence_xlsr_mamba_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_mamba, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/xlsr_mamba_asv19_defence}
+  - name: attack_defence_xlsr_linear_asv19
+    type: attack
+    optional: true
+    params: {detector: xlsr_linear, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/xlsr_linear_asv19_defence}
+  - name: attack_defence_aasist3_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist3, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/aasist3_asv19_defence}
+  - name: attack_defence_nes2net_v2_asv19
+    type: attack
+    optional: true
+    params: {detector: nes2net_v2, manifest: data/reference/native.csv, only: [pgd], defences: configs/defences.yaml, run_dir: runs_defence/pipeline/nes2net_v2_asv19_defence}
+
+  - name: report_defence
+    type: report
+    always: true
+    optional: true
+    params: {pipeline: configs/pipeline_defence.yaml, out: runs_defence/pipeline/report}

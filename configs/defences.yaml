@@ -1,0 +1,19 @@
+mp3_64:
+  kind: codec
+  level: 64
+  options: {codec: mp3}
+
+bandpass_4k:
+  kind: bandpass
+  level: 4000
+  options: {low_hz: 100}
+
+encodec_24:
+  kind: neural_codec
+  level: 24
+  options: {}
+
+noise_60db:
+  kind: noise
+  level: 60
+  options: {color: pink}

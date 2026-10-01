@@ -1,0 +1,51 @@
+%%{init: {'flowchart': {'curve':'linear'}}}%%
+flowchart TB
+  Q(["1 · Насколько устойчив детектор аудиодипфейков<br/>к искажениям и adversarial-атакам?"]):::term
+  IN[/"2 · Вход: пул детекторов + 3 домена<br/>(ASVspoof2019 родной / 2021 / In-the-Wild)"/]:::data
+  SUB["3 · Подвыборка 800/класс, seed"]:::proc
+  A(("А")):::conn
+  DTR{"4 · Детектор обучаемый?"}:::dec
+  FIT["5 · Обучить на ASVspoof2019-train<br/>(единственное обучение)"]:::proc
+  FRZ["Заморозить веса — zero-shot"]:::proc
+  CLN["6 · Clean-скоринг → EER, AUC, Cllr, minDCF<br/>порог t* в точке EER"]:::proc
+  MODE{"7 · Режим воздействия?"}:::dec
+  MA["8 · A. Естественные искажения<br/>шум · птицы · реверберация · gain · полоса<br/>сетка силы · реальные корпуса + синтетика"]:::nat
+  MB["B. Канал / кодек<br/>mp3 128→8 · телефония G.711/G.722 · EnCodec"]:::nat
+  DDIF{"Модель дифференцируема?"}:::dec
+  MC["C. Adversarial FGSM/PGD<br/>бюджет ε из SNR возмущения + перенос"]:::adv
+  MCT["Скоринг перенесённых adversarial-примеров"]:::adv
+  APP[["9 · Применить по сетке силы, парно с clean<br/>→ Δscore на каждый семпл"]]:::sub
+  CEIL{"10 · Родной домен?<br/>(clean EER мал — нет потолка)"}:::dec
+  DEG["11 · ΔEER vs clean + бутстрэп-CI<br/>монотонность отклика"]:::proc
+  SHIFT["Только сдвиг домена (clean→clean),<br/>деградацию мерить на родном"]:::skip
+  COL["12 · Собрать метрики прогона"]:::proc
+  ALL{"13 · Все (модель × домен) пройдены?"}:::dec
+  MET[/"14 · Агрегированные метрики: EER+Cllr, ΔEER±CI,<br/>ASR, перенос атак, обратная задача (RF)"/]:::data
+  HYP["15 · Проверка гипотез<br/>Г1 искажения ≥ атаки · Г2 SSL устойчивее<br/>Г4 EER мало → нужен Cllr · Г2′ синтетика ≈ реальность"]:::proc
+  OUT(["16 · Вывод: профиль устойчивости/уязвимости<br/>детектора по доменам и воздействиям"]):::term
+
+  Q --> IN --> SUB --> A --> DTR
+  DTR -->|"да · reference"| FIT --> CLN
+  DTR -->|"нет · нейросети"| FRZ --> CLN
+  CLN --> MODE
+  MODE -->|"A"| MA --> APP
+  MODE -->|"B"| MB --> APP
+  MODE -->|"C"| DDIF
+  DDIF -->|"да"| MC --> APP
+  DDIF -->|"нет"| MCT --> APP
+  APP --> CEIL
+  CEIL -->|"да"| DEG --> COL
+  CEIL -->|"нет · потолок"| SHIFT --> COL
+  COL --> ALL
+  ALL -->|"нет → след. пара (модель, домен)"| A
+  ALL -->|"да"| MET --> HYP --> OUT
+
+  classDef term fill:#eceeef,stroke:#6b7280,color:#374151
+  classDef data fill:#e7f6ec,stroke:#2f9e5a,color:#14532d
+  classDef proc fill:#e6f1fb,stroke:#2f7fd1,color:#0c447c
+  classDef dec  fill:#fdf1dd,stroke:#d69a2f,color:#7a4d0c
+  classDef nat  fill:#e0f5f3,stroke:#1aa39a,color:#0c4b47
+  classDef adv  fill:#fdeaea,stroke:#d64545,color:#7a1c1c
+  classDef sub  fill:#efe9fb,stroke:#7c5cd6,color:#3c2a7a
+  classDef skip fill:#f0f1f2,stroke:#9aa0a6,color:#4b5563
+  classDef conn fill:#fdf1dd,stroke:#d69a2f,color:#7a4d0c

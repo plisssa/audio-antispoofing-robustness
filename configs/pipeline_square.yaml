@@ -1,0 +1,15 @@
+runs: runs_square
+
+stages:
+  - name: attack_square_ssl_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: ssl_aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_square.yaml, run_dir: runs_square/pipeline/ssl_aasist_asv19_square}
+  - name: attack_square_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_square.yaml, run_dir: runs_square/pipeline/aasist_asv19_square}
+  - name: attack_square_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_square.yaml, run_dir: runs_square/pipeline/rawnet2_asv19_square}

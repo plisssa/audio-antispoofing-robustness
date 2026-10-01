@@ -1,0 +1,15 @@
+runs: runs_align
+
+stages:
+  - name: align_asv19
+    type: align
+    optional: true
+    params: {detector: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/native.csv, n: 300, seed: 1337, run_dir: runs_align/pipeline/align_asv19}
+  - name: align_itw
+    type: align
+    optional: true
+    params: {detector: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain.csv, n: 300, seed: 1337, run_dir: runs_align/pipeline/align_itw}
+  - name: align_asv21
+    type: align
+    optional: true
+    params: {detector: [aasist, aasist3, spectra_aasist3, rawnet2, ssl_aasist, xlsr_mamba, nes2net, xlsr_linear, wavlm_linear, nes2net_v2], manifest: data/reference/crossdomain21.csv, n: 300, seed: 1337, run_dir: runs_align/pipeline/align_asv21}

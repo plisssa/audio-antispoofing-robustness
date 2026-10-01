@@ -1,0 +1,11 @@
+runs: runs_warm_raw
+
+stages:
+  - name: attack_warm_aasist_asv19
+    type: attack
+    optional: true
+    params: {detector: aasist, manifest: data/reference/native_strength.csv, attacks: configs/attacks_warm_nes2net.yaml, run_dir: runs_diag/pipeline/aasist_asv19_warm}
+  - name: attack_warm_rawnet2_asv19
+    type: attack
+    optional: true
+    params: {detector: rawnet2, manifest: data/reference/native_strength.csv, attacks: configs/attacks_warm_nes2net.yaml, run_dir: runs_diag/pipeline/rawnet2_asv19_warm}
